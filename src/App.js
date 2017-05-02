@@ -3,7 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import Text from './Text'
 import withBorder from './withBorder'
-import { renameProp, compose } from 'recompose'
+import { renameProp, compose, mapProps } from 'recompose'
+import ColorlessText from './ColorlessText'
+import { omit } from 'lodash/fp'
 
 const BorderedText = compose(
   withBorder,
@@ -18,8 +20,15 @@ const DoubleBorderedText = compose(
   renameProp('textColor', 'color')
 )(Text)
 
+const omitProps = compose(mapProps, omit)
+
 const SameColorBorderedText = withBorder(Text)
 const SameColorDoubleBorderedText = withBorder(withBorder(Text))
+
+const BorderedColorlessText = compose(
+  withBorder, 
+  omitProps(['color'])
+)(ColorlessText)
 
 class App extends Component {
   render() {
@@ -37,6 +46,8 @@ class App extends Component {
         <DoubleBorderedText text='Hello' innerBorderColor='red' textColor='pink' outerBorderColor='green'/>
         <SameColorBorderedText text='Hello' color='pink'/>
         <SameColorDoubleBorderedText text='Hello' color='magenta'/>
+        <ColorlessText text='Colorless'/>
+        <BorderedColorlessText color="red" text='Colorless'/>
       </div>
     );
   }
