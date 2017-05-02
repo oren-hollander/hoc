@@ -42,10 +42,12 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <Text text='Hello' color='red'/>
-        <BorderedText text='Hello' textColor='orange' color='blue'/>
+        <BorderedText text='Hello' textColor='orange' color='blue' onClick={m => {console.log(`click ${m}`)}}/>
+        
         <DoubleBorderedText text='Hello' innerBorderColor='red' textColor='pink' outerBorderColor='green'/>
         <SameColorBorderedText text='Hello' color='pink'/>
         <SameColorDoubleBorderedText text='Hello' color='magenta'/>
+        
         <ColorlessText text='Colorless'/>
         <BorderedColorlessText color="red" text='Colorless'/>
       </div>
